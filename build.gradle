@@ -32,12 +32,17 @@ wrapper {
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.apache.tools.ant.taskdefs.condition.Os
 
+group = 'org.grobid'
+version = '0.8.1-SNAPSHOT'
+description = 'grobid-ner'
+
 ext {
     // treating them separately, these jars will be flattened into grobid-core.jar on installing,
     // to avoid missing dependencies from the projects that include grobid-core (see 'jar' taskin grobid-core)
     localLibs = []
-    grobidVersion = '0.8.1-SNAPSHOT'
+    grobidVersion = version
 }
+
 
 dependencies {
     implementation(group: 'xml-apis', name: 'xml-apis') {
@@ -82,10 +87,6 @@ dependencies {
     implementation "com.fasterxml.jackson.module:jackson-module-afterburner:2.10.1"
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.10.1"
 }
-
-group = 'org.grobid'
-version = '0.8.0'
-description = 'grobid-ner'
 
 sourceCompatibility = 1.11
 targetCompatibility = 1.11
