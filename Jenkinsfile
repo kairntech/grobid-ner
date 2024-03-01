@@ -25,25 +25,25 @@ pipeline {
           analyseBuildCause()
         }
       }
-      stage('Build grobid-ner') {
-        steps {
-          println 'Building grobid-ner'
-          script {
-            sh 'gradle clean build'
-          }
+    }
+    stage('Build grobid-ner') {
+      steps {
+        println 'Building grobid-ner'
+        script {
+          sh 'gradle clean build +x test'
         }
       }
-      stage('Build grobid-ner') {
-        steps {
-          println 'Publish grobid-ner'
-          script {
-            sh 'gradle clean publishToMavenLocal'
-            // withCredentials([usernamePassword(credentialsId: 'jenkins-artifactory', passwordVariable: 'artifactoryPassword', usernameVariable: 'artifactoryUsername')]) {
-            //   script {
-            //     sh 'ORG_GRADLE_PROJECT_artifactoryPassword="${artifactoryPassword}" ORG_GRADLE_PROJECT_artifactoryUsername=${artifactoryUsername} gradle publish'
-            //   }  
-            // }
-          }
+    }
+    stage('Build grobid-ner') {
+      steps {
+        println 'Publish grobid-ner'
+        script {
+          sh 'gradle clean publishToMavenLocal'
+          // withCredentials([usernamePassword(credentialsId: 'jenkins-artifactory', passwordVariable: 'artifactoryPassword', usernameVariable: 'artifactoryUsername')]) {
+          //   script {
+          //     sh 'ORG_GRADLE_PROJECT_artifactoryPassword="${artifactoryPassword}" ORG_GRADLE_PROJECT_artifactoryUsername=${artifactoryUsername} gradle publish'
+          //   }  
+          // }
         }
       }
     }
