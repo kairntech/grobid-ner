@@ -173,5 +173,6 @@ def analyseBuildCause() {
   }
   // just to test
   currentBuild.result = 'ABORTED'
+  throw new Exception("aborted")
 
 }
