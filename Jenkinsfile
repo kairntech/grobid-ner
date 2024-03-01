@@ -171,5 +171,9 @@ def analyseBuildCause() {
     switchEmailNotif(true, BUILD_NUMBER)
     println 'Job started by Branch Discovery, proceeding'
   }
+  // just for test
+  currentBuild.result = 'NOT_BUILT'
+  currentBuild.getRawBuild().getExecutor().interrupt(Result.NOT_BUILT)
+  sleep(1)
 
 }
