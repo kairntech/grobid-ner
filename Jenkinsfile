@@ -25,18 +25,24 @@ pipeline {
           analyseBuildCause()
         }
       }
-    }
-    stage('Generate new version') {
-      when {
-        environment name: 'SKIP_JOB', value: '0'
+      stage('Build grobid-ner') {
+        steps {
+          println 'Building grobid-ner'
+          script {
+            sh 'gradle clean build'
+          }
+        }
       }
-      stages {
-        stage('Build grobid-ner') {
-          steps {
-            println 'Building grobid-ner'
-            script {
-              sh './gradlew clean install'
-            }
+      stage('Build grobid-ner') {
+        steps {
+          println 'Publish grobid-ner'
+          script {
+            sh 'gradle clean publishToMavenLocal'
+            // withCredentials([usernamePassword(credentialsId: 'jenkins-artifactory', passwordVariable: 'artifactoryPassword', usernameVariable: 'artifactoryUsername')]) {
+            //   script {
+            //     sh 'ORG_GRADLE_PROJECT_artifactoryPassword="${artifactoryPassword}" ORG_GRADLE_PROJECT_artifactoryUsername=${artifactoryUsername} gradle publish'
+            //   }  
+            // }
           }
         }
       }
@@ -171,9 +177,9 @@ def analyseBuildCause() {
     switchEmailNotif(true, BUILD_NUMBER)
     println 'Job started by Branch Discovery, proceeding'
   }
-  // just for test
-  currentBuild.result = 'NOT_BUILT'
-  currentBuild.getRawBuild().getExecutor().interrupt(Result.NOT_BUILT)
-  sleep(1)
+  // if you want to stop the build without relying on when conditions based on env.SKIP_JOB 
+  // currentBuild.result = 'NOT_BUILT'
+  // currentBuild.getRawBuild().getExecutor().interrupt(Result.NOT_BUILT)
+  // sleep(2)
 
 }
