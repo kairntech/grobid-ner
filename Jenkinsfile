@@ -30,7 +30,7 @@ pipeline {
       steps {
         println 'Building grobid-ner'
         script {
-          sh 'gradle clean build +x test'
+          sh 'gradle clean build -x test'
         }
       }
     }
