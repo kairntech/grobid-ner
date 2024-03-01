@@ -13,6 +13,11 @@ pipeline {
     }
   }
 
+  triggers {
+    upstream(upstreamProjects: 'grobid/' + BRANCH_NAME.replaceAll('/', '%2F'),\
+                                threshold: hudson.model.Result.SUCCESS)
+  }
+
   stages {
     stage('Analyse build cause') {
       steps {
@@ -28,8 +33,7 @@ pipeline {
       stages {
         stage('Build grobid-ner') {
           steps {
-            println "Building grobid-ner, based on ${BRANCH_NAME}"
-            println "## Need to clone git@github.com:kairntech/grobid.git --branch ${BRANCH_NAME} ##"
+            println 'Building grobid-ner'
             script {
               sh './gradlew clean install'
             }
