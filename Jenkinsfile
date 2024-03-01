@@ -99,6 +99,7 @@ pipeline {
   }
 
   tools {
+    jdk 'JDK-1.11'
     gradle 'GRADLE-7.2'
   }
 }
