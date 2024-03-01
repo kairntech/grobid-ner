@@ -36,6 +36,7 @@ ext {
     // treating them separately, these jars will be flattened into grobid-core.jar on installing,
     // to avoid missing dependencies from the projects that include grobid-core (see 'jar' taskin grobid-core)
     localLibs = []
+    grobidVersion = '0.8.1-SNAPSHOT'
 }
 
 dependencies {
@@ -48,8 +49,8 @@ dependencies {
         }
     }
 
-    implementation 'org.grobid:grobid-core:0.8.0'
-    implementation 'org.grobid:grobid-trainer:0.8.0'
+    implementation "org.grobid:grobid-core:${grobidVersion}"
+    implementation "org.grobid:grobid-trainer:${grobidVersion}"
     implementation 'black.ninia:jep:4.0.2'
     implementation 'org.apache.opennlp:opennlp-tools:1.9.1'
     implementation "joda-time:joda-time:2.9.9"
