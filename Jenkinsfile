@@ -34,7 +34,7 @@ pipeline {
         }
       }
     }
-    stage('Build grobid-ner') {
+    stage('Publish grobid-ner') {
       steps {
         println 'Publish grobid-ner'
         script {
