@@ -171,9 +171,5 @@ def analyseBuildCause() {
     switchEmailNotif(true, BUILD_NUMBER)
     println 'Job started by Branch Discovery, proceeding'
   }
-  // just to test
-  currentBuild.result = 'ABORTED'
-  throw new FlowInterruptedException(Result.ABORTED)
-  // throw new Exception("aborted")
 
 }
