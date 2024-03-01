@@ -172,6 +172,6 @@ def analyseBuildCause() {
     println 'Job started by Branch Discovery, proceeding'
   }
   // just to test
-  currentBuild.result = 'NOT_BUILT'
+  currentBuild.result = 'ABORTED'
 
 }
