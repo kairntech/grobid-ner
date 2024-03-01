@@ -173,6 +173,7 @@ def analyseBuildCause() {
   }
   // just to test
   currentBuild.result = 'ABORTED'
-  throw new Exception("aborted")
+  throw new FlowInterruptedException(Result.ABORTED)
+  // throw new Exception("aborted")
 
 }
